@@ -7,66 +7,97 @@
    Colour Blind Mode
 =================================*/
 
-body.colorblind {
-    background: #ffffff;
-    color: #000;
+body.colorblind{
+    background:#ffffff;
+    color:#000000;
 }
 
 /* Navbar */
-body.colorblind .navbar {
-    background: #003366 !important;
+body.colorblind .navbar{
+    background:#003366 !important;
 }
 
-/* Hero */
-body.colorblind .hero {
-    background: #F5F5F5 !important;
-    color: #000;
-}
-
-/* Buttons */
-body.colorblind .btn-light {
-    background: #FFD400 !important;
-    color: #000 !important;
-}
-
-body.colorblind .btn-success {
-    background: #005A9C !important;
-    border-color: #005A9C !important;
-}
-
-/* Cards */
-body.colorblind .category-box,
-body.colorblind .card {
-    border: 3px solid #003366;
-    background: #fff;
-}
-
-/* Statistics */
-body.colorblind .text-success {
-    color: #003366 !important;
-}
-
-/* Links */
-body.colorblind a {
-    color: #003366;
-}
-
+/* Hero Section */
 body.colorblind .hero{
-    background: #F4F4F4 !important;
-}
-
-body.colorblind .display-4{
+    background:#ffffff !important;
     color:#000 !important;
 }
 
+/* Section Backgrounds */
+body.colorblind .bg-white,
+body.colorblind section{
+    background:#ffffff !important;
+}
+
+/* Headings */
+body.colorblind h1,
+body.colorblind h2,
+body.colorblind h3,
+body.colorblind h4,
+body.colorblind h5,
+body.colorblind h6{
+    color:#000 !important;
+}
+
+/* Paragraphs */
+body.colorblind p,
 body.colorblind .lead{
     color:#000 !important;
 }
 
-body.colorblind .bg-success{
-    background:#003366 !important;
-}
-
+/* Success Text */
 body.colorblind .text-success{
     color:#003366 !important;
+}
+
+/* Buttons */
+body.colorblind .btn-success{
+    background:#003366 !important;
+    border-color:#003366 !important;
+    color:#ffffff !important;
+}
+
+body.colorblind .btn-light{
+    background:#FFD400 !important;
+    border-color:#FFD400 !important;
+    color:#000000 !important;
+}
+
+/* Search Box */
+body.colorblind .form-control{
+    border:2px solid #003366;
+}
+
+/* Category Cards */
+body.colorblind .category-box{
+    background:#ffffff;
+    border:3px solid #003366;
+    color:#000;
+}
+
+/* Product Cards */
+body.colorblind .card{
+    background:#ffffff;
+    border:3px solid #003366;
+}
+
+/* Badge */
+body.colorblind .badge{
+    background:#003366 !important;
+    color:#ffffff !important;
+}
+
+/* Links */
+body.colorblind a{
+    color:#003366;
+}
+
+body.colorblind a:hover{
+    color:#0056b3;
+}
+
+/* Footer */
+body.colorblind footer{
+    background:#003366;
+    color:#ffffff;
 }
