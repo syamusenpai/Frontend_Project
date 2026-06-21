@@ -2,3 +2,71 @@
     --primary:#28a745;
     --secondary:#20c997;
 }
+
+/* ===============================
+   Colour Blind Mode
+=================================*/
+
+body.colorblind {
+    background: #ffffff;
+    color: #000;
+}
+
+/* Navbar */
+body.colorblind .navbar {
+    background: #003366 !important;
+}
+
+/* Hero */
+body.colorblind .hero {
+    background: #F5F5F5 !important;
+    color: #000;
+}
+
+/* Buttons */
+body.colorblind .btn-light {
+    background: #FFD400 !important;
+    color: #000 !important;
+}
+
+body.colorblind .btn-success {
+    background: #005A9C !important;
+    border-color: #005A9C !important;
+}
+
+/* Cards */
+body.colorblind .category-box,
+body.colorblind .card {
+    border: 3px solid #003366;
+    background: #fff;
+}
+
+/* Statistics */
+body.colorblind .text-success {
+    color: #003366 !important;
+}
+
+/* Links */
+body.colorblind a {
+    color: #003366;
+}
+
+body.colorblind .hero{
+    background: #F4F4F4 !important;
+}
+
+body.colorblind .display-4{
+    color:#000 !important;
+}
+
+body.colorblind .lead{
+    color:#000 !important;
+}
+
+body.colorblind .bg-success{
+    background:#003366 !important;
+}
+
+body.colorblind .text-success{
+    color:#003366 !important;
+}

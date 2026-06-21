@@ -64,7 +64,20 @@ async function loadFeaturedProducts(){
 
 }
 
-loadComponent("navbar", "components/navbar.html");
-loadComponent("footer", "components/footer.html");
 
-loadFeaturedProducts();
+async function init() {
+
+    await loadComponent("navbar", "components/navbar.html");
+
+    await loadComponent("footer", "components/footer.html");
+
+    loadFeaturedProducts();
+
+    // Initialize Colour Blind Mode
+    if (typeof initTheme === "function") {
+        initTheme();
+    }
+
+}
+
+init();
