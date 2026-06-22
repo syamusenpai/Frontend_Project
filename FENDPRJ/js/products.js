@@ -11,7 +11,7 @@ async function loadProducts() {
 
         displayProducts(allProducts);
 
-    } catch(error) {
+    } catch (error) {
 
         console.error(error);
 
@@ -21,7 +21,7 @@ async function loadProducts() {
 
 loadProducts();
 
-function displayProducts(products){
+function displayProducts(products) {
 
     const container = document.getElementById("productContainer");
 
@@ -54,7 +54,10 @@ function displayProducts(products){
                     <button
                         class="btn btn-success mt-auto detailsBtn"
                         data-id="${product.id}">
+
+                        <i class="bi bi-eye"></i>
                         View Details
+
                     </button>
 
                 </div>
@@ -67,7 +70,20 @@ function displayProducts(products){
 
     });
 
-}
+    document.querySelectorAll(".detailsBtn").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const id = this.dataset.id;
+
+            window.location.href = `product_details.html?id=${id}`;
+
+        });
+
+    });
+
+} 
+
 //search function
 loadProducts();
 
@@ -90,22 +106,22 @@ document.getElementById("sortSelect").addEventListener("change", function () {
 
     let products = [...allProducts];
 
-    switch(value){
+    switch (value) {
 
         case "lowHigh":
-            products.sort((a,b)=>a.price-b.price);
+            products.sort((a, b) => a.price - b.price);
             break;
 
         case "highLow":
-            products.sort((a,b)=>b.price-a.price);
+            products.sort((a, b) => b.price - a.price);
             break;
 
         case "az":
-            products.sort((a,b)=>a.title.localeCompare(b.title));
+            products.sort((a, b) => a.title.localeCompare(b.title));
             break;
 
         case "za":
-            products.sort((a,b)=>b.title.localeCompare(a.title));
+            products.sort((a, b) => b.title.localeCompare(a.title));
             break;
 
     }
@@ -115,10 +131,10 @@ document.getElementById("sortSelect").addEventListener("change", function () {
 });
 
 //refresh function
-document.getElementById("refreshBtn").addEventListener("click", ()=>{
+document.getElementById("refreshBtn").addEventListener("click", () => {
 
-    document.getElementById("searchInput").value="";
-    document.getElementById("sortSelect").value="default";
+    document.getElementById("searchInput").value = "";
+    document.getElementById("sortSelect").value = "default";
 
     displayProducts(allProducts);
 
