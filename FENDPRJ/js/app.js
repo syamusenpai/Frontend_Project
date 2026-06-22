@@ -7,18 +7,18 @@ async function loadComponent(id, file) {
     document.getElementById(id).innerHTML = html;
 
 }
-async function loadFeaturedProducts(){
+async function loadFeaturedProducts() {
 
-    try{
+    try {
 
         const response = await fetch(API_URL);
         const data = await response.json();
 
         const container = document.getElementById("featuredProducts");
 
-        container.innerHTML="";
+        container.innerHTML = "";
 
-        data.products.slice(0,4).forEach(product=>{
+        data.products.slice(0, 4).forEach(product => {
 
             container.innerHTML += `
                 <div class="col-lg-3 col-md-6">
@@ -56,7 +56,7 @@ async function loadFeaturedProducts(){
 
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
@@ -68,16 +68,15 @@ async function loadFeaturedProducts(){
 async function init() {
 
     await loadComponent("navbar", "components/navbar.html");
-
     await loadComponent("footer", "components/footer.html");
 
-    loadFeaturedProducts();
+    if (document.getElementById("featuredProducts")) {
+        loadFeaturedProducts();
+    }
 
-    // Initialize Colour Blind Mode
     if (typeof initTheme === "function") {
         initTheme();
     }
-
 }
 
 init();
