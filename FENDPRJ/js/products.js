@@ -85,8 +85,6 @@ function displayProducts(products) {
 } 
 
 //search function
-loadProducts();
-
 document.getElementById("searchInput").addEventListener("input", function () {
 
     const keyword = this.value.toLowerCase();

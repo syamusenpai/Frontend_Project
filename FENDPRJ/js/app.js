@@ -39,9 +39,12 @@ async function loadFeaturedProducts() {
                 RM ${product.price}
                 </h4>
 
-                <button class="btn btn-success w-100 mt-2">
+                <button
+                    class="btn btn-success w-100 mt-2 detailsBtn"
+                    data-id="${product.id}">
 
-                View Details
+                    <i class="bi bi-eye"></i>
+                    View Details
 
                 </button>
 
@@ -53,6 +56,18 @@ async function loadFeaturedProducts() {
             `;
 
         });
+document.querySelectorAll(".detailsBtn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const id = this.dataset.id;
+
+        window.location.href = `product_details.html?id=${id}`;
+
+    });
+
+});
+
 
     }
 
