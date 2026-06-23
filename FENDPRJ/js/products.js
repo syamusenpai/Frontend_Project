@@ -4,7 +4,7 @@ async function loadProducts() {
 
     try {
 
-        const response = await fetch(API_URL);
+        const response = await fetch(`${API_URL}/category/groceries`);
         const data = await response.json();
 
         allProducts = data.products;

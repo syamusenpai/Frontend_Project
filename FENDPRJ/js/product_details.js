@@ -2,6 +2,10 @@
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
+console.log(API_URL);
+console.log(productId);
+console.log(`${API_URL}/${productId}`);
+
 async function loadProduct() {
 
     try {
