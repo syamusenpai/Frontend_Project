@@ -1,101 +1,192 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Products | Smart Grocery</title>
 
-    <title>Compare Products</title>
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/responsive.css">
+```
+
 </head>
 
 <body>
 
+```
 <div id="navbar"></div>
 
 <div class="container py-5">
 
-    <h1 class="text-center mb-3">Grocery Product Comparison</h1>
+    <h1 class="text-center mb-3">
+        Grocery Product Comparison
+    </h1>
 
     <p class="text-center text-muted mb-5">
-        Compare two grocery products based on price, rating and availability.
+        Compare grocery products based on price, rating, category and availability.
     </p>
 
-    <div class="row">
+    <div class="row g-3">
 
-        <div class="col-md-6 mb-3">
-            <label class="form-label">Select Product 1</label>
+        <div class="col-md-6">
+
+            <label class="form-label">
+                Select Product 1
+            </label>
+
             <select id="product1" class="form-select">
-                <option value="">Loading products...</option>
+
+                <option value="">
+                    Loading Products...
+                </option>
+
             </select>
+
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label class="form-label">Select Product 2</label>
+        <div class="col-md-6">
+
+            <label class="form-label">
+                Select Product 2
+            </label>
+
             <select id="product2" class="form-select">
-                <option value="">Loading products...</option>
+
+                <option value="">
+                    Loading Products...
+                </option>
+
             </select>
+
         </div>
 
     </div>
 
-    <div class="text-center mt-3">
+    <div class="text-center mt-4">
+
         <button class="btn btn-success" onclick="compareItem()">
+
             Compare Product
+
         </button>
+
     </div>
 
     <div id="compareResult" class="mt-5" style="display:none;">
 
         <div class="card shadow">
 
-            <div class="card-header">
+            <div class="card-header bg-success text-white">
+
                 Comparison Result
+
             </div>
 
             <div class="card-body">
 
-                <table class="table table-bordered text-center">
+                <div class="table-responsive">
 
-                    <thead>
-                        <tr>
-                            <th>Details</th>
-                            <th id="name1"></th>
-                            <th id="name2"></th>
-                        </tr>
-                    </thead>
+                    <table class="table table-bordered text-center align-middle">
 
-                    <tbody>
+                        <thead>
 
-                        <tr>
-                            <td>Price (RM)</td>
-                            <td id="price1"></td>
-                            <td id="price2"></td>
-                        </tr>
+                            <tr>
 
-                        <tr>
-                            <td>Rating</td>
-                            <td id="rating1"></td>
-                            <td id="rating2"></td>
-                        </tr>
+                                <th>Details</th>
 
-                        <tr>
-                            <td>Category</td>
-                            <td id="category1"></td>
-                            <td id="category2"></td>
-                        </tr>
+                                <th id="name1"></th>
 
-                        <tr>
-                            <td>Availability</td>
-                            <td id="stock1"></td>
-                            <td id="stock2"></td>
-                        </tr>
+                                <th id="name2"></th>
 
-                    </tbody>
+                            </tr>
 
-                </table>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>Image</td>
+
+                                <td>
+
+                                    <img id="image1"
+                                         class="img-fluid"
+                                         width="150">
+
+                                </td>
+
+                                <td>
+
+                                    <img id="image2"
+                                         class="img-fluid"
+                                         width="150">
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Price (RM)</td>
+
+                                <td id="price1"></td>
+
+                                <td id="price2"></td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Rating</td>
+
+                                <td id="rating1"></td>
+
+                                <td id="rating2"></td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Category</td>
+
+                                <td id="category1"></td>
+
+                                <td id="category2"></td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Availability</td>
+
+                                <td id="stock1"></td>
+
+                                <td id="stock2"></td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>Description</td>
+
+                                <td id="description1"></td>
+
+                                <td id="description2"></td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
@@ -113,127 +204,135 @@
 
 <script>
 
-let groceryList = [
+    let groceryList = [];
 
-    {
-        id: 1,
-        title: "Rice 5kg",
-        price: 25.90,
-        rating: 4.8,
-        category: "Grains",
-        stock: "In Stock"
-    },
+    async function getProducts() {
 
-    {
-        id: 2,
-        title: "Fresh Milk",
-        price: 8.50,
-        rating: 4.6,
-        category: "Dairy",
-        stock: "In Stock"
-    },
+        try {
 
-    {
-        id: 3,
-        title: "White Bread",
-        price: 3.20,
-        rating: 4.3,
-        category: "Bakery",
-        stock: "Limited Stock"
-    },
+            const response =
+                await fetch(`${API_URL}/category/groceries`);
 
-    {
-        id: 4,
-        title: "Eggs 10pcs",
-        price: 6.80,
-        rating: 4.7,
-        category: "Protein",
-        stock: "In Stock"
-    },
+            const data =
+                await response.json();
 
-    {
-        id: 5,
-        title: "Chicken Breast 1kg",
-        price: 14.90,
-        rating: 4.9,
-        category: "Meat",
-        stock: "In Stock"
-    }
+            groceryList =
+                data.products;
 
-];
+            const product1 =
+                document.getElementById("product1");
 
-async function getProducts() {
+            const product2 =
+                document.getElementById("product2");
 
-    try {
+            product1.innerHTML = "";
+            product2.innerHTML = "";
 
-        const product1 = document.getElementById("product1");
-        const product2 = document.getElementById("product2");
+            groceryList.forEach(item => {
 
-        product1.innerHTML = "";
-        product2.innerHTML = "";
+                product1.innerHTML += `
 
-        groceryList.forEach(item => {
+                    <option value="${item.id}">
+                        ${item.title}
+                    </option>
 
-            product1.innerHTML += `
-                <option value="${item.id}">
-                    ${item.title}
-                </option>
-            `;
+                `;
 
-            product2.innerHTML += `
-                <option value="${item.id}">
-                    ${item.title}
-                </option>
-            `;
+                product2.innerHTML += `
 
-        });
+                    <option value="${item.id}">
+                        ${item.title}
+                    </option>
 
-    } catch(error) {
+                `;
 
-        console.log(error);
+            });
+
+        }
+
+        catch(error) {
+
+            console.log(error);
+
+        }
 
     }
 
-}
+    function compareItem() {
 
-function compareItem() {
+        let firstProduct =
+            groceryList.find(
+                item =>
+                item.id ==
+                document.getElementById("product1").value
+            );
 
-    let firstProduct =
-        groceryList.find(
-            item => item.id == document.getElementById("product1").value
-        );
+        let secondProduct =
+            groceryList.find(
+                item =>
+                item.id ==
+                document.getElementById("product2").value
+            );
 
-    let secondProduct =
-        groceryList.find(
-            item => item.id == document.getElementById("product2").value
-        );
+        if(!firstProduct || !secondProduct){
 
-    if(!firstProduct || !secondProduct){
+            alert("Please select two products.");
+            return;
 
-        alert("Please select two products first.");
-        return;
+        }
+
+        document.getElementById("compareResult").style.display =
+            "block";
+
+        document.getElementById("name1").innerText =
+            firstProduct.title;
+
+        document.getElementById("name2").innerText =
+            secondProduct.title;
+
+        document.getElementById("image1").src =
+            firstProduct.thumbnail;
+
+        document.getElementById("image2").src =
+            secondProduct.thumbnail;
+
+        document.getElementById("price1").innerText =
+            "RM " + firstProduct.price;
+
+        document.getElementById("price2").innerText =
+            "RM " + secondProduct.price;
+
+        document.getElementById("rating1").innerText =
+            firstProduct.rating;
+
+        document.getElementById("rating2").innerText =
+            secondProduct.rating;
+
+        document.getElementById("category1").innerText =
+            firstProduct.category;
+
+        document.getElementById("category2").innerText =
+            secondProduct.category;
+
+        document.getElementById("stock1").innerText =
+            firstProduct.stock;
+
+        document.getElementById("stock2").innerText =
+            secondProduct.stock;
+
+        document.getElementById("description1").innerText =
+            firstProduct.description;
+
+        document.getElementById("description2").innerText =
+            secondProduct.description;
 
     }
 
-    document.getElementById("compareResult").style.display = "block";
-
-    document.getElementById("name1").innerText = firstProduct.title;
-    document.getElementById("name2").innerText = secondProduct.title;
-
-    document.getElementById("price1").innerText = "RM " + firstProduct.price;
-    document.getElementById("price2").innerText = "RM " + secondProduct.price;
-
-    document.getElementById("rating1").innerText = firstProduct.rating;
-    document.getElementById("rating2").innerText = secondProduct.rating;
-
-    document.getElementById("category1").innerText = firstProduct.category;
-    document.getElementById("category2").innerText = secondProduct.category;
-
-    document.getElementById("stock1").innerText = firstProduct.stock;
-    document.getElementById("stock2").innerText = secondProduct.stock;
-
-}
-
-getProducts();
+    getProducts();
 
 </script>
+```
+
+</body>
+
+</html>
