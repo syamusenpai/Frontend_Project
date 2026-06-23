@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summary Report</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/responsive.css">
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Summary Report</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+<link rel="stylesheet"
+      href="css/theme.css">
+
+<link rel="stylesheet"
+      href="css/responsive.css">
+```
+
 </head>
 
 <body>
@@ -17,187 +33,227 @@
 
 <div class="container py-5">
 
-    <h1 class="text-center mb-3">
-        Grocery Summary Report
-    </h1>
+```
+<h1 class="text-center mb-3">
 
-    <p class="text-center text-muted mb-5">
-        View grocery product information and generate a printable report.
-    </p>
+    Grocery Summary Report
 
-    <div class="row justify-content-center">
+</h1>
 
-        <div class="col-md-6">
+<p class="text-center text-muted mb-5">
 
-            <label class="form-label">
-                Select Product
-            </label>
+    View grocery product information and generate a printable report.
 
-            <select id="productSelect" class="form-select">
+</p>
 
-                <option value="">
-                    Choose a Product
-                </option>
+<div class="row justify-content-center">
 
-            </select>
+    <div class="col-md-6">
+
+        <label class="form-label">
+
+            Select Product
+
+        </label>
+
+        <select id="productSelect"
+                class="form-select">
+
+            <option value="">
+
+                Loading Products...
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-4">
+
+    <button class="btn btn-success"
+            onclick="showSummary()">
+
+        Generate Summary
+
+    </button>
+
+    <button class="btn btn-primary ms-2"
+            onclick="window.print()">
+
+        Print Report
+
+    </button>
+
+</div>
+
+<div id="summaryCard"
+     class="mt-5"
+     style="display:none;">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            Product Summary
 
         </div>
 
-    </div>
+        <div class="card-body">
 
-    <div class="text-center mt-4">
+            <div class="text-center mb-4">
 
-        <button class="btn btn-success" onclick="showSummary()">
-            Generate Summary
-        </button>
-
-        <button class="btn btn-primary ms-2" onclick="window.print()">
-            Print Report
-        </button>
-
-    </div>
-
-    <div id="summaryCard" class="mt-5" style="display:none;">
-
-        <div class="card shadow">
-
-            <div class="card-header bg-success text-white">
-                Product Summary
-            </div>
-
-            <div class="card-body">
-
-                <h3 id="productName"></h3>
-
-                <hr>
-
-                <p>
-                    <strong>Price:</strong>
-                    RM <span id="productPrice"></span>
-                </p>
-
-                <p>
-                    <strong>Rating:</strong>
-                    <span id="productRating"></span>
-                </p>
-
-                <p>
-                    <strong>Category:</strong>
-                    <span id="productCategory"></span>
-                </p>
-
-                <p>
-                    <strong>Availability:</strong>
-                    <span id="productStock"></span>
-                </p>
-
-                <hr>
-
-                <h5>Recommendation</h5>
-
-                <p id="recommendation"></p>
+                <img id="productImage"
+                     class="img-fluid rounded"
+                     width="220">
 
             </div>
+
+            <h3 id="productName"
+                class="text-center"></h3>
+
+            <hr>
+
+            <p>
+
+                <strong>Price :</strong>
+
+                RM <span id="productPrice"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Rating :</strong>
+
+                <span id="productRating"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Category :</strong>
+
+                <span id="productCategory"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Availability :</strong>
+
+                <span id="productStock"></span>
+
+            </p>
+
+            <p>
+
+                <strong>Description :</strong>
+
+                <span id="productDescription"></span>
+
+            </p>
+
+            <hr>
+
+            <h5>
+
+                Recommendation
+
+            </h5>
+
+            <p id="recommendation"></p>
 
         </div>
 
     </div>
 
 </div>
+```
+
+</div>
 
 <div id="footer"></div>
 
+<script src="js/api.js"></script>
+
 <script src="js/app.js"></script>
+
 <script src="js/theme.js"></script>
 
 <script>
 
-let groceryList = [
+let groceryList = [];
 
-    {
-        id: 1,
-        title: "Rice 5kg",
-        price: 25.90,
-        rating: 4.8,
-        category: "Grains",
-        stock: "In Stock"
-    },
+async function loadProducts() {
 
-    {
-        id: 2,
-        title: "Fresh Milk",
-        price: 8.50,
-        rating: 4.6,
-        category: "Dairy",
-        stock: "In Stock"
-    },
+    try {
 
-    {
-        id: 3,
-        title: "White Bread",
-        price: 3.20,
-        rating: 4.3,
-        category: "Bakery",
-        stock: "Limited Stock"
-    },
+        const response =
+            await fetch(`${API_URL}/category/groceries`);
 
-    {
-        id: 4,
-        title: "Eggs 10pcs",
-        price: 6.80,
-        rating: 4.7,
-        category: "Protein",
-        stock: "In Stock"
-    },
+        const data =
+            await response.json();
 
-    {
-        id: 5,
-        title: "Chicken Breast 1kg",
-        price: 14.90,
-        rating: 4.9,
-        category: "Meat",
-        stock: "In Stock"
+        groceryList =
+            data.products;
+
+        const productSelect =
+            document.getElementById("productSelect");
+
+        productSelect.innerHTML =
+            `<option value="">Choose a Product</option>`;
+
+        groceryList.forEach(product => {
+
+            productSelect.innerHTML += `
+
+                <option value="${product.id}">
+                    ${product.title}
+                </option>
+
+            `;
+
+        });
+
     }
 
-];
+    catch(error){
 
-function loadProducts() {
+        console.log(error);
 
-    const productSelect =
-        document.getElementById("productSelect");
-
-    groceryList.forEach(product => {
-
-        productSelect.innerHTML += `
-
-            <option value="${product.id}">
-                ${product.title}
-            </option>
-
-        `;
-
-    });
+    }
 
 }
 
 function showSummary() {
 
-    let selectedProduct = groceryList.find(
+    let selectedProduct =
+        groceryList.find(
 
-        item =>
-        item.id ==
-        document.getElementById("productSelect").value
+            item =>
 
-    );
+            item.id ==
+
+            document.getElementById("productSelect").value
+
+        );
 
     if(!selectedProduct){
 
         alert("Please select a product.");
+
         return;
 
     }
 
-    document.getElementById("summaryCard").style.display = "block";
+    document.getElementById("summaryCard").style.display =
+        "block";
+
+    document.getElementById("productImage").src =
+        selectedProduct.thumbnail;
 
     document.getElementById("productName").innerText =
         selectedProduct.title;
@@ -214,26 +270,29 @@ function showSummary() {
     document.getElementById("productStock").innerText =
         selectedProduct.stock;
 
+    document.getElementById("productDescription").innerText =
+        selectedProduct.description;
+
     let recommendation = "";
 
     if(selectedProduct.rating >= 4.7){
 
         recommendation =
-        "Highly recommended based on customer ratings.";
+        "Highly recommended based on customer ratings and product performance.";
 
     }
 
     else if(selectedProduct.rating >= 4.4){
 
         recommendation =
-        "Good product choice with positive reviews.";
+        "Good product choice with positive customer reviews.";
 
     }
 
     else{
 
         recommendation =
-        "Consider comparing with other available products.";
+        "Consider comparing this product with other available grocery products.";
 
     }
 
@@ -247,4 +306,5 @@ loadProducts();
 </script>
 
 </body>
+
 </html>
