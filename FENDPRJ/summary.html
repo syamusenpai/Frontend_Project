@@ -275,29 +275,43 @@ function showSummary() {
 
     let recommendation = "";
 
-    if(selectedProduct.rating >= 4.7){
+if(selectedProduct.rating >= 4.7 && selectedProduct.stock > 50){
 
-        recommendation =
-        "Highly recommended based on customer ratings and product performance.";
+    recommendation =
+    "Excellent choice. Highly rated and widely available.";
 
-    }
+}
 
-    else if(selectedProduct.rating >= 4.4){
+else if(selectedProduct.rating >= 4.7){
 
-        recommendation =
-        "Good product choice with positive customer reviews.";
+    recommendation =
+    "Highly recommended based on strong customer ratings.";
 
-    }
+}
 
-    else{
+else if(selectedProduct.price < 10){
 
-        recommendation =
-        "Consider comparing this product with other available grocery products.";
+    recommendation =
+    "Budget-friendly product with affordable pricing.";
 
-    }
+}
 
-    document.getElementById("recommendation").innerText =
-        recommendation;
+else if(selectedProduct.stock < 20){
+
+    recommendation =
+    "Limited stock available. Purchase soon if needed.";
+
+}
+
+else{
+
+    recommendation =
+    "Compare this product with similar items before purchasing.";
+
+}
+
+document.getElementById("recommendation").innerText =
+    recommendation;
 
 }
 
