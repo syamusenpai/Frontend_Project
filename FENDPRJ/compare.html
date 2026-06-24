@@ -183,6 +183,30 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
                             </tr>
 
+                            <tr>
+                                <td>Calories (kcal)</td>
+                                <td id="calories1"></td>
+                                <td id="calories2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Protein (g)</td>
+                                <td id="protein1"></td>
+                                <td id="protein2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Fat (g)</td>
+                                <td id="fat1"></td>
+                                <td id="fat2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Carbohydrates (g)</td>
+                                <td id="carbs1"></td>
+                                <td id="carbs2"></td>
+                            </tr>
+
                         </tbody>
 
                     </table>
@@ -205,131 +229,188 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
 <script>
 
-    let groceryList = [];
+const DUMMY_API =
+"https://dummyjson.com/products/category/groceries";
 
-    async function getProducts() {
+let groceryList = [];
 
-        try {
+async function getProducts() {
 
-            const response =
-                await fetch(`${API_URL}/category/groceries`);
+    try {
 
-            const data =
-                await response.json();
+        const response = await fetch(DUMMY_API);
 
-            groceryList =
-                data.products;
+        const data = await response.json();
 
-            const product1 =
-                document.getElementById("product1");
+        groceryList = data.products;
 
-            const product2 =
-                document.getElementById("product2");
+        const product1 =
+            document.getElementById("product1");
 
-            product1.innerHTML = "";
-            product2.innerHTML = "";
+        const product2 =
+            document.getElementById("product2");
 
-            groceryList.forEach(item => {
+        product1.innerHTML = "";
+        product2.innerHTML = "";
 
-                product1.innerHTML += `
+        groceryList.forEach(product => {
 
-                    <option value="${item.id}">
-                        ${item.title}
-                    </option>
+            product1.innerHTML += `
+                <option value="${product.id}">
+                    ${product.title}
+                </option>
+            `;
 
-                `;
+            product2.innerHTML += `
+                <option value="${product.id}">
+                    ${product.title}
+                </option>
+            `;
 
-                product2.innerHTML += `
-
-                    <option value="${item.id}">
-                        ${item.title}
-                    </option>
-
-                `;
-
-            });
-
-        }
-
-        catch(error) {
-
-            console.log(error);
-
-        }
+        });
 
     }
 
-    function compareItem() {
+    catch(error) {
 
-        let firstProduct =
-            groceryList.find(
-                item =>
-                item.id ==
-                document.getElementById("product1").value
-            );
-
-        let secondProduct =
-            groceryList.find(
-                item =>
-                item.id ==
-                document.getElementById("product2").value
-            );
-
-        if(!firstProduct || !secondProduct){
-
-            alert("Please select two products.");
-            return;
-
-        }
-
-        document.getElementById("compareResult").style.display =
-            "block";
-
-        document.getElementById("name1").innerText =
-            firstProduct.title;
-
-        document.getElementById("name2").innerText =
-            secondProduct.title;
-
-        document.getElementById("image1").src =
-            firstProduct.thumbnail;
-
-        document.getElementById("image2").src =
-            secondProduct.thumbnail;
-
-        document.getElementById("price1").innerText =
-            "RM " + firstProduct.price;
-
-        document.getElementById("price2").innerText =
-            "RM " + secondProduct.price;
-
-        document.getElementById("rating1").innerText =
-            firstProduct.rating;
-
-        document.getElementById("rating2").innerText =
-            secondProduct.rating;
-
-        document.getElementById("category1").innerText =
-            firstProduct.category;
-
-        document.getElementById("category2").innerText =
-            secondProduct.category;
-
-        document.getElementById("stock1").innerText =
-            firstProduct.stock;
-
-        document.getElementById("stock2").innerText =
-            secondProduct.stock;
-
-        document.getElementById("description1").innerText =
-            firstProduct.description;
-
-        document.getElementById("description2").innerText =
-            secondProduct.description;
+        console.error(error);
 
     }
 
-    getProducts();
+}
+
+async function getNutrition(productName) {
+
+    try {
+
+        const response = await fetch(
+            `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(productName)}&json=1&page_size=1`
+        );
+
+        const data = await response.json();
+
+        if(data.products.length > 0){
+
+            return data.products[0];
+
+        }
+
+        return null;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        return null;
+
+    }
+
+}
+
+async function compareItem() {
+
+    const firstProduct =
+        groceryList.find(
+            item =>
+            item.id ==
+            document.getElementById("product1").value
+        );
+
+    const secondProduct =
+        groceryList.find(
+            item =>
+            item.id ==
+            document.getElementById("product2").value
+        );
+
+    if(!firstProduct || !secondProduct){
+
+        alert("Please select two products");
+
+        return;
+
+    }
+
+    document.getElementById("compareResult").style.display =
+        "block";
+
+    document.getElementById("name1").innerText =
+        firstProduct.title;
+
+    document.getElementById("name2").innerText =
+        secondProduct.title;
+
+    document.getElementById("image1").src =
+        firstProduct.thumbnail;
+
+    document.getElementById("image2").src =
+        secondProduct.thumbnail;
+
+    document.getElementById("price1").innerText =
+        "RM " + firstProduct.price;
+
+    document.getElementById("price2").innerText =
+        "RM " + secondProduct.price;
+
+    document.getElementById("rating1").innerText =
+        firstProduct.rating;
+
+    document.getElementById("rating2").innerText =
+        secondProduct.rating;
+
+    document.getElementById("category1").innerText =
+        firstProduct.category;
+
+    document.getElementById("category2").innerText =
+        secondProduct.category;
+
+    document.getElementById("stock1").innerText =
+        firstProduct.stock;
+
+    document.getElementById("stock2").innerText =
+        secondProduct.stock;
+
+    document.getElementById("description1").innerText =
+        firstProduct.description;
+
+    document.getElementById("description2").innerText =
+        secondProduct.description;
+
+    const nutrition1 =
+        await getNutrition(firstProduct.title);
+
+    const nutrition2 =
+        await getNutrition(secondProduct.title);
+
+    document.getElementById("calories1").innerText =
+        nutrition1?.nutriments?.["energy-kcal_100g"] || "N/A";
+
+    document.getElementById("calories2").innerText =
+        nutrition2?.nutriments?.["energy-kcal_100g"] || "N/A";
+
+    document.getElementById("protein1").innerText =
+        nutrition1?.nutriments?.proteins_100g || "N/A";
+
+    document.getElementById("protein2").innerText =
+        nutrition2?.nutriments?.proteins_100g || "N/A";
+
+    document.getElementById("fat1").innerText =
+        nutrition1?.nutriments?.fat_100g || "N/A";
+
+    document.getElementById("fat2").innerText =
+        nutrition2?.nutriments?.fat_100g || "N/A";
+
+    document.getElementById("carbs1").innerText =
+        nutrition1?.nutriments?.carbohydrates_100g || "N/A";
+
+    document.getElementById("carbs2").innerText =
+        nutrition2?.nutriments?.carbohydrates_100g || "N/A";
+
+}
+
+getProducts();
 
 </script>
 
