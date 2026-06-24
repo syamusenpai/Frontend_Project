@@ -93,7 +93,23 @@ document.getElementById("searchInput").addEventListener("input", function () {
         product.title.toLowerCase().includes(keyword)
     );
 
+    if (filtered.length === 0) {
+
+    document.getElementById("productContainer").innerHTML = `
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-search fs-1 text-secondary"></i>
+            <h4 class="mt-3">No Products Found</h4>
+            <p class="text-muted">
+                Try another keyword.
+            </p>
+        </div>
+    `;
+
+} else {
+
     displayProducts(filtered);
+
+}
 
 });
 
