@@ -208,3 +208,42 @@ body.kids-mode .hero{
     padding:140px 0;
 
 }
+
+/* ==========================
+   PRINT REPORT
+========================== */
+
+@media print {
+
+    /* Hide everything except the report */
+    #navbar,
+    #footer,
+    .row.justify-content-center,
+    .text-center.mt-4 {
+        display: none !important;
+    }
+
+    body,
+    .container,
+    main {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #summaryCard {
+        display: block !important;
+        margin: 0 !important;
+        page-break-before: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    img {
+        max-height: 180px;
+    }
+}

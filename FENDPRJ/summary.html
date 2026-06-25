@@ -29,11 +29,11 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <div id="navbar"></div>
 
-<div class="container py-5">
+<main class="container py-4 flex-grow-1">
 
 
 <h1 class="text-center mb-3">
@@ -83,7 +83,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
     </button>
 
     <button class="btn btn-primary ms-2"
-            onclick="window.print()">
+            onclick="printReport()">
 
         Print Report
 
@@ -92,7 +92,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 </div>
 
 <div id="summaryCard"
-     class="mt-5"
+     class="mt-2"
      style="display:none;">
 
     <div class="card shadow">
@@ -105,221 +105,106 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
         <div class="card-body">
 
-            <div class="text-center mb-4">
+    <div class="text-center">
 
-                <img id="productImage"
-                     class="img-fluid rounded"
-                     width="220">
+        <img id="productImage"
+             class="img-fluid mb-3"
+             width="220">
 
-            </div>
+        <h2 id="productName"></h2>
 
-            <h3 id="productName"
-                class="text-center"></h3>
-
-            <hr>
-
-            <p>
-
-                <strong>Price :</strong>
-
-                RM <span id="productPrice"></span>
-
-            </p>
-
-            <p>
-
-                <strong>Rating :</strong>
-
-                <span id="productRating"></span>
-
-            </p>
-
-            <p>
-
-                <strong>Category :</strong>
-
-                <span id="productCategory"></span>
-
-            </p>
-
-            <p>
-
-                <strong>Availability :</strong>
-
-                <span id="productStock"></span>
-
-            </p>
-
-            <p>
-
-                <strong>Description :</strong>
-
-                <span id="productDescription"></span>
-
-            </p>
-
-            <hr>
-
-            <h5>
-
-                Recommendation
-
-            </h5>
-
-            <p id="recommendation"></p>
-
-        </div>
+        <span id="healthScore"
+              class="badge bg-success fs-6">
+        </span>
 
     </div>
 
+    <hr>
+
+    <table class="table">
+
+        <tr>
+            <th>Price</th>
+            <td id="productPrice"></td>
+        </tr>
+
+        <tr>
+            <th>Rating</th>
+            <td id="productRating"></td>
+        </tr>
+
+        <tr>
+            <th>Category</th>
+            <td id="productCategory"></td>
+        </tr>
+
+        <tr>
+            <th>Availability</th>
+            <td id="productStock"></td>
+        </tr>
+
+    </table>
+
+    <h4 class="mt-4">
+        Nutrition Facts
+    </h4>
+
+    <table class="table">
+
+        <tr>
+            <th>Calories</th>
+            <td id="calories"></td>
+        </tr>
+
+        <tr>
+            <th>Protein</th>
+            <td id="protein"></td>
+        </tr>
+
+        <tr>
+            <th>Fat</th>
+            <td id="fat"></td>
+        </tr>
+
+        <tr>
+            <th>Carbohydrates</th>
+            <td id="carbs"></td>
+        </tr>
+
+    </table>
+
+    <h4>
+        Recommendation
+    </h4>
+
+    <p id="recommendation"></p>
+
+    <hr>
+
+    <small class="text-muted">
+
+        Generated on :
+
+        <span id="generatedDate"></span>
+
+    </small>
+
+</div>
+
 </div>
 
 
-</div>
+</main>
 
 <div id="footer"></div>
 
 <script src="js/api.js"></script>
-
 <script src="js/app.js"></script>
-
 <script src="js/theme.js"></script>
+<script src="js/nutrition.js"></script>
+<script src="js/report.js"></script>
 
-<script>
 
-let groceryList = [];
-
-async function loadProducts() {
-
-    try {
-
-        const response =
-            await fetch(`${API_URL}/category/groceries`);
-
-        const data =
-            await response.json();
-
-        groceryList =
-            data.products;
-
-        const productSelect =
-            document.getElementById("productSelect");
-
-        productSelect.innerHTML =
-            `<option value="">Choose a Product</option>`;
-
-        groceryList.forEach(product => {
-
-            productSelect.innerHTML += `
-
-                <option value="${product.id}">
-                    ${product.title}
-                </option>
-
-            `;
-
-        });
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-    }
-
-}
-
-function showSummary() {
-
-    let selectedProduct =
-        groceryList.find(
-
-            item =>
-
-            item.id ==
-
-            document.getElementById("productSelect").value
-
-        );
-
-    if(!selectedProduct){
-
-        alert("Please select a product.");
-
-        return;
-
-    }
-
-    document.getElementById("summaryCard").style.display =
-        "block";
-
-    document.getElementById("productImage").src =
-        selectedProduct.thumbnail;
-
-    document.getElementById("productName").innerText =
-        selectedProduct.title;
-
-    document.getElementById("productPrice").innerText =
-        selectedProduct.price;
-
-    document.getElementById("productRating").innerText =
-        selectedProduct.rating;
-
-    document.getElementById("productCategory").innerText =
-        selectedProduct.category;
-
-    document.getElementById("productStock").innerText =
-        selectedProduct.stock;
-
-    document.getElementById("productDescription").innerText =
-        selectedProduct.description;
-
-    let recommendation = "";
-
-if(selectedProduct.rating >= 4.7 && selectedProduct.stock > 50){
-
-    recommendation =
-    "Excellent choice. Highly rated and widely available.";
-
-}
-
-else if(selectedProduct.rating >= 4.7){
-
-    recommendation =
-    "Highly recommended based on strong customer ratings.";
-
-}
-
-else if(selectedProduct.price < 10){
-
-    recommendation =
-    "Budget-friendly product with affordable pricing.";
-
-}
-
-else if(selectedProduct.stock < 20){
-
-    recommendation =
-    "Limited stock available. Purchase soon if needed.";
-
-}
-
-else{
-
-    recommendation =
-    "Compare this product with similar items before purchasing.";
-
-}
-
-document.getElementById("recommendation").innerText =
-    recommendation;
-
-}
-
-loadProducts();
-
-</script>
 
 </body>
 
