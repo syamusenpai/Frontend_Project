@@ -128,3 +128,83 @@ section{
     padding:8px 16px;
     border-radius:20px;
 }
+
+/* ===========================
+   Kids Mode
+=========================== */
+
+body.kids-mode{
+
+    background:#FFF9E6 !important;
+
+    font-size:18px;
+
+}
+
+body.kids-mode h1{
+
+    font-size:3.5rem !important;
+
+}
+
+body.kids-mode h2,
+body.kids-mode h3,
+body.kids-mode h4,
+body.kids-mode h5{
+
+    font-size:1.6rem !important;
+
+}
+
+body.kids-mode p,
+body.kids-mode a,
+body.kids-mode label{
+
+    font-size:1.2rem !important;
+
+}
+
+body.kids-mode .btn{
+
+    font-size:1.2rem !important;
+
+    padding:14px 28px !important;
+
+    border-radius:20px;
+
+}
+
+body.kids-mode .card{
+
+    transform:scale(1.05);
+
+    border-radius:20px;
+
+}
+
+body.kids-mode .card-img-top{
+
+    height:260px !important;
+
+}
+
+body.kids-mode input:not(.form-check-input),
+body.kids-mode select{
+
+    font-size:1.2rem !important;
+
+    padding:14px;
+
+}
+
+body.kids-mode .navbar{
+
+    font-size:1.2rem;
+
+}
+
+body.kids-mode .hero{
+
+    padding:140px 0;
+
+}
