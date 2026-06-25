@@ -129,6 +129,18 @@ section{
     border-radius:20px;
 }
 
+.button-group{
+    margin-bottom:30px;
+}
+
+.button-group .btn{
+    margin:5px;
+}
+
+body.kids-mode .button-group{
+    margin-bottom:70px;
+}
+
 /* ===========================
    Kids Mode
 =========================== */
