@@ -1,5 +1,5 @@
 const DUMMY_API =
-"https://dummyjson.com/products/category/groceries";
+    "https://dummyjson.com/products/category/groceries";
 
 let groceryList = [];
 
@@ -56,9 +56,11 @@ async function loadProducts() {
 
         });
 
+        loadSelectedProduct();
+
     }
 
-    catch(error){
+    catch (error) {
 
         console.log(error);
 
@@ -66,14 +68,28 @@ async function loadProducts() {
 
 }
 
-function showSummary(){
+function loadSelectedProduct() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const productId = params.get("product");
+
+    if (!productId) return;
+
+    document.getElementById("productSelect").value = productId;
+
+    showSummary();
+
+}
+
+function showSummary() {
 
     const product =
         groceryList.find(item =>
             item.id == document.getElementById("productSelect").value
         );
 
-    if(!product){
+    if (!product) {
 
         alert("Please select a product.");
 
@@ -128,26 +144,26 @@ function showSummary(){
 
 }
 
-function generateHealthScore(product, nutrition){
+function generateHealthScore(product, nutrition) {
 
-    if(!nutrition)
+    if (!nutrition)
         return "★★★☆☆ Average";
 
     let score = 0;
 
-    if(product.rating >= 4.5)
+    if (product.rating >= 4.5)
         score++;
 
-    if(nutrition.calories <= 150)
+    if (nutrition.calories <= 150)
         score++;
 
-    if(nutrition.protein >= 10)
+    if (nutrition.protein >= 10)
         score++;
 
-    if(nutrition.fat <= 10)
+    if (nutrition.fat <= 10)
         score++;
 
-    switch(score){
+    switch (score) {
 
         case 4:
             return "★★★★★ Excellent";
@@ -168,39 +184,39 @@ function generateHealthScore(product, nutrition){
 
 }
 
-function generateRecommendation(product, nutrition){
+function generateRecommendation(product, nutrition) {
 
-    if(!nutrition){
+    if (!nutrition) {
 
         return "No nutrition information available.";
 
     }
 
-    if(nutrition.protein >= 20){
+    if (nutrition.protein >= 20) {
 
         return "Excellent source of protein. Suitable for muscle growth and high-protein diets.";
 
     }
 
-    if(nutrition.calories < 100){
+    if (nutrition.calories < 100) {
 
         return "Low-calorie food. Suitable for healthy snacking.";
 
     }
 
-    if(nutrition.fat > 20){
+    if (nutrition.fat > 20) {
 
         return "High fat content. Consume in moderation.";
 
     }
 
-    if(nutrition.carbs > 50){
+    if (nutrition.carbs > 50) {
 
         return "High carbohydrate food. Good energy source but enjoy in moderation.";
 
     }
 
-    if(product.rating >= 4.5){
+    if (product.rating >= 4.5) {
 
         return "Highly rated by customers and recommended for purchase.";
 

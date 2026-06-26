@@ -1,5 +1,5 @@
 const DUMMY_API =
-"https://dummyjson.com/products/category/groceries";
+    "https://dummyjson.com/products/category/groceries";
 
 let groceryList = [];
 
@@ -9,24 +9,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
 });
 
-async function getProducts(){
+async function getProducts() {
 
-    try{
+    try {
 
-        const response =
-            await fetch(DUMMY_API);
+        const response = await fetch(DUMMY_API);
+        const data = await response.json();
 
-        const data =
-            await response.json();
-
-        groceryList =
-            data.products;
+        groceryList = data.products;
 
         populateDropdown();
+        loadSelectedProduct();
 
-    }
-
-    catch(error){
+    } catch (error) {
 
         console.error(error);
 
@@ -34,7 +29,28 @@ async function getProducts(){
 
 }
 
-function populateDropdown(){
+function loadSelectedProduct() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const productId = params.get("product1");
+
+    if (!productId) return;
+
+    document.getElementById("product1").value = productId;
+
+    // If Product 2 is the same, select another one
+    if (document.getElementById("product2").value == productId) {
+
+        document.getElementById("product2").selectedIndex = 1;
+
+    }
+
+    compareItem();
+
+}
+
+function populateDropdown() {
 
     const product1 =
         document.getElementById("product1");
@@ -48,17 +64,17 @@ function populateDropdown(){
     product2.innerHTML =
         "";
 
-    groceryList.forEach(product=>{
+    groceryList.forEach(product => {
 
         product1.innerHTML +=
-        `
+            `
         <option value="${product.id}">
             ${product.title}
         </option>
         `;
 
         product2.innerHTML +=
-        `
+            `
         <option value="${product.id}">
             ${product.title}
         </option>
@@ -69,7 +85,7 @@ function populateDropdown(){
 }
 
 
-function getNutrition(productName){
+function getNutrition(productName) {
 
     return nutritionData[productName] || {
 
@@ -83,19 +99,19 @@ function getNutrition(productName){
 }
 
 
- function compareItem(){
+function compareItem() {
 
     const firstProduct =
         groceryList.find(item =>
-        item.id ==
-        product1.value);
+            item.id ==
+            product1.value);
 
     const secondProduct =
         groceryList.find(item =>
-        item.id ==
-        product2.value);
+            item.id ==
+            product2.value);
 
-    if(!firstProduct || !secondProduct){
+    if (!firstProduct || !secondProduct) {
 
         alert("Please select two products.");
 

@@ -3,101 +3,297 @@
     --secondary:#20c997;
 }
 
-/* ===============================
-   Colour Blind Mode
-=================================*/
+/* =====================================
+   COLOUR BLIND MODE
+=====================================*/
 
 body.colorblind{
-    background:#ffffff;
-    color:#000000;
+    background:#F8FAFC;
+    color:#1F2937;
 }
 
-/* Navbar */
+/* ==========================
+   Navbar
+==========================*/
+
 body.colorblind .navbar{
-    background:#003366 !important;
+    background:#003B6D !important;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
 }
 
-/* Hero Section */
-body.colorblind .hero{
-    background:#ffffff !important;
+body.colorblind .navbar-brand,
+body.colorblind .navbar .nav-link{
+    color:#FFFFFF !important;
+    transition:.2s;
+}
+
+body.colorblind .navbar .nav-link:hover{
+    color:#FFD54F !important;
+    text-decoration:underline;
+}
+
+body.colorblind .navbar .nav-link.active{
+    background:#FFD54F;
     color:#000 !important;
+    border-radius:8px;
+    padding:6px 14px;
+    font-weight:600;
 }
 
-/* Section Backgrounds */
-body.colorblind .bg-white,
-body.colorblind section{
-    background:#ffffff !important;
+/* ==========================
+   Hero
+==========================*/
+
+body.colorblind .hero{
+    background:#F8FAFC !important;
+    color:#111827 !important;
 }
 
-/* Headings */
+/* ==========================
+   Sections
+==========================*/
+
+body.colorblind section,
+body.colorblind .bg-light,
+body.colorblind .bg-white{
+    background:#F8FAFC !important;
+}
+
+/* ==========================
+   Headings
+==========================*/
+
 body.colorblind h1,
 body.colorblind h2,
 body.colorblind h3,
 body.colorblind h4,
 body.colorblind h5,
 body.colorblind h6{
-    color:#000 !important;
+    color:#111827 !important;
 }
 
-/* Paragraphs */
+/* ==========================
+   Text
+==========================*/
+
 body.colorblind p,
+body.colorblind span,
 body.colorblind .lead{
-    color:#000 !important;
+    color:#374151 !important;
 }
 
-/* Success Text */
+/* ==========================
+   Price / Success Text
+==========================*/
+
 body.colorblind .text-success{
-    color:#003366 !important;
+    color:#1565C0 !important;
+    font-weight:700;
 }
 
-/* Buttons */
+/* ==========================
+   Buttons
+==========================*/
+
 body.colorblind .btn-success{
-    background:#003366 !important;
-    border-color:#003366 !important;
-    color:#ffffff !important;
+    background:#1976D2 !important;
+    border-color:#1976D2 !important;
+    color:#fff !important;
+}
+
+body.colorblind .btn-success:hover{
+    background:#0D47A1 !important;
+    border-color:#0D47A1 !important;
+}
+
+body.colorblind .btn-outline-success{
+    color:#1976D2 !important;
+    border:2px solid #1976D2 !important;
+    background:#fff;
+}
+
+body.colorblind .btn-outline-success:hover{
+    background:#1976D2 !important;
+    color:#fff !important;
 }
 
 body.colorblind .btn-light{
-    background:#FFD400 !important;
-    border-color:#FFD400 !important;
-    color:#000000 !important;
+    background:#FFD54F !important;
+    color:#000 !important;
+    border:none;
 }
 
-/* Search Box */
-body.colorblind .form-control{
-    border:2px solid #003366;
+/* ==========================
+   Inputs
+==========================*/
+
+body.colorblind .form-control,
+body.colorblind .form-select{
+    border:2px solid #1976D2;
 }
 
-/* Category Cards */
-body.colorblind .category-box{
-    background:#ffffff;
-    border:3px solid #003366;
-    color:#000;
+body.colorblind .form-control:focus,
+body.colorblind .form-select:focus{
+    border-color:#0D47A1;
+    box-shadow:0 0 0 .2rem rgba(25,118,210,.25);
 }
 
-/* Product Cards */
+/* ==========================
+   Cards
+==========================*/
+
 body.colorblind .card{
-    background:#ffffff;
-    border:3px solid #003366;
+    background:#fff;
+    border:none;
+    border-left:6px solid #1976D2;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.25s;
 }
 
-/* Badge */
+body.colorblind .card:hover{
+    transform:translateY(-5px);
+}
+
+/* ==========================
+   Category Card
+==========================*/
+
+body.colorblind .category-box{
+    background:#fff;
+    border-left:6px solid #1976D2;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* ==========================
+   Badge
+==========================*/
+
 body.colorblind .badge{
-    background:#003366 !important;
-    color:#ffffff !important;
+    background:#1565C0 !important;
+    color:#fff !important;
 }
 
-/* Links */
+/* ==========================
+   Table
+==========================*/
+
+body.colorblind table{
+    background:#fff;
+}
+
+body.colorblind th{
+    background:#003B6D;
+    color:#fff;
+}
+
+body.colorblind tr:nth-child(even){
+    background:#F5F9FF;
+}
+
+/* ==========================
+   Progress Bar
+==========================*/
+
+body.colorblind .progress{
+    background:#DDE8F5;
+}
+
+body.colorblind .progress-bar{
+    background:#1976D2 !important;
+}
+
+/* ==========================
+   Links
+==========================*/
+
 body.colorblind a{
-    color:#003366;
+    color:#1976D2;
 }
 
 body.colorblind a:hover{
-    color:#0056b3;
+    color:#0D47A1;
 }
 
-/* Footer */
-body.colorblind footer{
-    background:#003366;
-    color:#ffffff;
+/* ==========================
+   Icons
+==========================*/
+
+body.colorblind i{
+    color:inherit;
+}
+
+/* ==========================
+   Footer
+==========================*/
+
+body.colorblind footer,
+body.colorblind .footer{
+    background:#003B6D !important;
+    color:#FFFFFF !important;
+}
+
+body.colorblind footer p,
+body.colorblind footer h1,
+body.colorblind footer h2,
+body.colorblind footer h3,
+body.colorblind footer h4,
+body.colorblind footer h5,
+body.colorblind footer h6,
+body.colorblind .footer p,
+body.colorblind .footer h1,
+body.colorblind .footer h2,
+body.colorblind .footer h3,
+body.colorblind .footer h4,
+body.colorblind .footer h5,
+body.colorblind .footer h6{
+    color:#FFFFFF !important;
+}
+
+body.colorblind footer a,
+body.colorblind .footer a{
+    color:#FFD54F !important;
+}
+
+body.colorblind footer a:hover,
+body.colorblind .footer a:hover{
+    color:#FFFFFF !important;
+}
+
+/* ==========================
+   Product Image
+==========================*/
+
+body.colorblind .product-image{
+    background:#fff;
+}
+
+/* ==========================
+   About Page
+==========================*/
+
+body.colorblind .team-card{
+    border-left:6px solid #1976D2;
+}
+
+body.colorblind .team-role{
+    background:#1976D2;
+    color:#fff;
+}
+
+/* ==========================
+   Scrollbar (optional)
+==========================*/
+
+body.colorblind::-webkit-scrollbar{
+    width:10px;
+}
+
+body.colorblind::-webkit-scrollbar-thumb{
+    background:#1976D2;
+    border-radius:10px;
+}
+
+body.colorblind::-webkit-scrollbar-track{
+    background:#E8EEF7;
 }

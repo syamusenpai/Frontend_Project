@@ -11,7 +11,6 @@ async function loadProduct() {
     try {
 
         const response = await fetch(`${API_URL}/${productId}`);
-
         const product = await response.json();
 
         // Product Image
@@ -44,6 +43,20 @@ async function loadProduct() {
 
         document.getElementById("healthBar").style.width = score + "%";
         document.getElementById("healthBar").textContent = score + "%";
+
+        // Compare Button
+        document.getElementById("compareBtn").addEventListener("click", () => {
+
+            window.location.href = `compare.html?product1=${product.id}`;
+
+        });
+
+        // View Summary Button
+        document.getElementById("summaryBtn").addEventListener("click", () => {
+
+            window.location.href = `summary.html?product=${product.id}`;
+
+        });
 
     }
     catch (error) {

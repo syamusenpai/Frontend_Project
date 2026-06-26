@@ -4,201 +4,187 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Summary Report</title> 
+    <title>Summary Report</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-      rel="stylesheet">
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 
-<link rel="stylesheet"
-      href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
-<link rel="stylesheet"
-      href="css/theme.css">
+    <link rel="stylesheet" href="css/theme.css">
 
-<link rel="stylesheet"
-      href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css">
 
 
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-<div id="navbar"></div>
+    <div id="navbar"></div>
 
-<main class="container py-4 flex-grow-1">
+    <main class="container py-4 flex-grow-1">
 
 
-<h1 class="text-center mb-3">
+        <h1 class="text-center mb-3">
 
-    Grocery Summary Report
+            Grocery Summary Report
 
-</h1>
+        </h1>
 
-<p class="text-center text-muted mb-5">
+        <p class="text-center text-muted mb-5">
 
-    View grocery product information and generate a printable report.
+            View grocery product information and generate a printable report.
 
-</p>
+        </p>
 
-<div class="row justify-content-center">
+        <div class="row justify-content-center">
 
-    <div class="col-md-6">
+            <div class="col-md-6">
 
-        <label class="form-label">
+                <label class="form-label">
 
-            Select Product
+                    Select Product
 
-        </label>
+                </label>
 
-        <select id="productSelect"
-                class="form-select">
+                <select id="productSelect" class="form-select">
 
-            <option value="">
+                    <option value="">
 
-                Loading Products...
+                        Loading Products...
 
-            </option>
+                    </option>
 
-        </select>
+                </select>
 
-    </div>
-
-</div>
-
-<div class="button-group text-center mt-4">
-
-    <button class="btn btn-success"
-            onclick="showSummary()">
-        Generate Summary
-    </button>
-
-    <button class="btn btn-primary"
-            onclick="printReport()">
-        Print Report
-    </button>
-
-</div>
-
-<div id="summaryCard"
-     class="mt-2"
-     style="display:none;">
-
-    <div class="card shadow">
-
-        <div class="card-header bg-success text-white">
-
-            Product Summary
+            </div>
 
         </div>
 
-        <div class="card-body">
+        <div class="button-group text-center mt-4">
 
-    <div class="text-center">
+            <button class="btn btn-success" onclick="showSummary()">
+                Generate Summary
+            </button>
 
-        <img id="productImage"
-             class="img-fluid mb-3"
-             width="220">
+            <button class="btn btn-primary" onclick="printReport()">
+                Print Report
+            </button>
 
-        <h2 id="productName"></h2>
+        </div>
 
-        <span id="healthScore"
-              class="badge bg-success fs-6">
-        </span>
+        <div id="summaryCard" class="mt-2" style="display:none;">
 
-    </div>
+            <div class="card shadow">
 
-    <hr>
+                <div class="card-header bg-success text-white">
 
-    <table class="table">
+                    Product Summary
 
-        <tr>
-            <th>Price</th>
-            <td id="productPrice"></td>
-        </tr>
+                </div>
 
-        <tr>
-            <th>Rating</th>
-            <td id="productRating"></td>
-        </tr>
+                <div class="card-body">
 
-        <tr>
-            <th>Category</th>
-            <td id="productCategory"></td>
-        </tr>
+                    <div class="text-center">
 
-        <tr>
-            <th>Availability</th>
-            <td id="productStock"></td>
-        </tr>
+                        <img id="productImage" class="img-fluid mb-3" width="220">
 
-    </table>
+                        <h2 id="productName"></h2>
 
-    <h4 class="mt-4">
-        Nutrition Facts
-    </h4>
+                        <span id="healthScore" class="badge bg-success fs-6">
+                        </span>
 
-    <table class="table">
+                    </div>
 
-        <tr>
-            <th>Calories</th>
-            <td id="calories"></td>
-        </tr>
+                    <hr>
 
-        <tr>
-            <th>Protein</th>
-            <td id="protein"></td>
-        </tr>
+                    <table class="table">
 
-        <tr>
-            <th>Fat</th>
-            <td id="fat"></td>
-        </tr>
+                        <tr>
+                            <th>Price</th>
+                            <td id="productPrice"></td>
+                        </tr>
 
-        <tr>
-            <th>Carbohydrates</th>
-            <td id="carbs"></td>
-        </tr>
+                        <tr>
+                            <th>Rating</th>
+                            <td id="productRating"></td>
+                        </tr>
 
-    </table>
+                        <tr>
+                            <th>Category</th>
+                            <td id="productCategory"></td>
+                        </tr>
 
-    <h4>
-        Recommendation
-    </h4>
+                        <tr>
+                            <th>Availability</th>
+                            <td id="productStock"></td>
+                        </tr>
 
-    <p id="recommendation"></p>
+                    </table>
 
-    <hr>
+                    <h4 class="mt-4">
+                        Nutrition Facts
+                    </h4>
 
-    <small class="text-muted">
+                    <table class="table">
 
-        Generated on :
+                        <tr>
+                            <th>Calories</th>
+                            <td id="calories"></td>
+                        </tr>
 
-        <span id="generatedDate"></span>
+                        <tr>
+                            <th>Protein</th>
+                            <td id="protein"></td>
+                        </tr>
 
-    </small>
+                        <tr>
+                            <th>Fat</th>
+                            <td id="fat"></td>
+                        </tr>
 
-</div>
+                        <tr>
+                            <th>Carbohydrates</th>
+                            <td id="carbs"></td>
+                        </tr>
 
-</div>
+                    </table>
+
+                    <h4>
+                        Recommendation
+                    </h4>
+
+                    <p id="recommendation"></p>
+
+                    <hr>
+
+                    <small class="text-muted">
+
+                        Generated on :
+
+                        <span id="generatedDate"></span>
+
+                    </small>
+
+                </div>
+
+            </div>
 
 
-</main>
+    </main>
 
-<div id="footer"></div>
+    <div id="footer"></div>
 
-<script src="js/api.js"></script>
-<script src="js/app.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/nutrition.js"></script>
-<script src="js/report.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/nutrition.js"></script>
+    <script src="js/report.js"></script>
 
 
 
