@@ -22,4 +22,57 @@ function initTheme() {
 
     });
 
+
+    // ==========================
+        // Kids Mode
+        // ==========================
+
+        const kidsModeBtn =
+        document.getElementById("kidsModeBtn");
+
+        if(kidsModeBtn){
+
+            if(localStorage.getItem("kidsMode") === "true"){
+
+                document.body.classList.add("kids-mode");
+
+                kidsModeBtn.checked = true;
+
+                document.getElementById("brandTitle").innerHTML =
+                    "🍎 Smart Grocery Kids";
+
+            }
+
+            kidsModeBtn.addEventListener("change", function(){
+
+                document.body.classList.toggle("kids-mode");
+
+                localStorage.setItem(
+                    "kidsMode",
+                    this.checked
+                );
+
+                const brand = document.getElementById("brandTitle");
+
+                if(this.checked){
+
+                    brand.innerHTML = "🍎 Smart Grocery Kids";
+
+                }
+                else{
+
+                    brand.innerHTML = `
+                        <i class="bi bi-basket2-fill"></i>
+                        Smart Grocery
+                    `;
+
+                }
+
+            });
+
+        }
+
+
 }
+
+        

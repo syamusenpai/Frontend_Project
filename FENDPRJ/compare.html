@@ -18,12 +18,12 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 
 <div id="navbar"></div>
 
-<div class="container py-5">
+<main class="container py-5 flex-grow-1">
 
     <h1 class="text-center mb-3">
         Grocery Product Comparison
@@ -183,6 +183,30 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
                             </tr>
 
+                            <tr>
+                                <td>Calories (kcal)</td>
+                                <td id="calories1"></td>
+                                <td id="calories2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Protein (g)</td>
+                                <td id="protein1"></td>
+                                <td id="protein2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Fat (g)</td>
+                                <td id="fat1"></td>
+                                <td id="fat2"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Carbohydrates (g)</td>
+                                <td id="carbs1"></td>
+                                <td id="carbs2"></td>
+                            </tr>
+
                         </tbody>
 
                     </table>
@@ -195,143 +219,17 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
     </div>
 
-</div>
+</main>
 
 <div id="footer"></div>
 
 <script src="js/api.js"></script>
 <script src="js/app.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/nutrition.js"></script>
+<script src="js/compare.js"></script>
 
-<script>
 
-    let groceryList = [];
-
-    async function getProducts() {
-
-        try {
-
-            const response =
-                await fetch(`${API_URL}/category/groceries`);
-
-            const data =
-                await response.json();
-
-            groceryList =
-                data.products;
-
-            const product1 =
-                document.getElementById("product1");
-
-            const product2 =
-                document.getElementById("product2");
-
-            product1.innerHTML = "";
-            product2.innerHTML = "";
-
-            groceryList.forEach(item => {
-
-                product1.innerHTML += `
-
-                    <option value="${item.id}">
-                        ${item.title}
-                    </option>
-
-                `;
-
-                product2.innerHTML += `
-
-                    <option value="${item.id}">
-                        ${item.title}
-                    </option>
-
-                `;
-
-            });
-
-        }
-
-        catch(error) {
-
-            console.log(error);
-
-        }
-
-    }
-
-    function compareItem() {
-
-        let firstProduct =
-            groceryList.find(
-                item =>
-                item.id ==
-                document.getElementById("product1").value
-            );
-
-        let secondProduct =
-            groceryList.find(
-                item =>
-                item.id ==
-                document.getElementById("product2").value
-            );
-
-        if(!firstProduct || !secondProduct){
-
-            alert("Please select two products.");
-            return;
-
-        }
-
-        document.getElementById("compareResult").style.display =
-            "block";
-
-        document.getElementById("name1").innerText =
-            firstProduct.title;
-
-        document.getElementById("name2").innerText =
-            secondProduct.title;
-
-        document.getElementById("image1").src =
-            firstProduct.thumbnail;
-
-        document.getElementById("image2").src =
-            secondProduct.thumbnail;
-
-        document.getElementById("price1").innerText =
-            "RM " + firstProduct.price;
-
-        document.getElementById("price2").innerText =
-            "RM " + secondProduct.price;
-
-        document.getElementById("rating1").innerText =
-            firstProduct.rating;
-
-        document.getElementById("rating2").innerText =
-            secondProduct.rating;
-
-        document.getElementById("category1").innerText =
-            firstProduct.category;
-
-        document.getElementById("category2").innerText =
-            secondProduct.category;
-
-        document.getElementById("stock1").innerText =
-            firstProduct.stock;
-
-        document.getElementById("stock2").innerText =
-            secondProduct.stock;
-
-        document.getElementById("description1").innerText =
-            firstProduct.description;
-
-        document.getElementById("description2").innerText =
-            secondProduct.description;
-
-    }
-
-    getProducts();
-
-</script>
 
 
 </body>
