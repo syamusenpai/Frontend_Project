@@ -2,6 +2,15 @@ let allProducts = [];
 
 async function loadProducts() {
 
+    const container = document.getElementById("productContainer");
+
+    container.innerHTML = `
+        <div class="text-center py-5">
+            <div class="spinner-border text-success"></div>
+            <p class="mt-3">Loading Products...</p>
+        </div>
+    `;
+
     try {
 
         const response = await fetch(`${API_URL}/category/groceries`);
